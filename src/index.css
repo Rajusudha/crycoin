@@ -1,13 +1,155 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;500;600;700;800;900&display=swap');
+
+
+:root{
+  --white:#fff;
+  --black:#111;
+  --blue:#3a80e9;
+  --grey:#888;
+  --darkgrey:#1b1b1b;
+  --green:#61c96f;
+  --red:#f94141;
+ 
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/*(data theme) dark theme start to change the color when swich on off */
+[data-theme="light"] {
+  --white: #ffffff;
+  --black: #111;
+  --grey: #888;
+  --darkgrey: #1b1b1b;
+
+ 
+}
+
+
+[data-theme="dark"] {
+  --white: #111;
+  --black: #fff;
+  --grey: #888;
+  --darkgrey: #f3f3f1;
+  
+ 
+}
+
+/* end */
+
+html{
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+body {
+  
+ 
+  margin: 0;
+  font-family:  'inter',sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  background: var(--black);
+  
+}
+/* select field */
+::selection{
+
+  color: var(--white);
+  background-color: var(--blue);
+}
+/* set drag image false */
+img {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+/* scroll bar */
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background:(--black);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:var(--blue);
+  border-radius: 5px;
+}
+h1,h2,h3,h4,h5,h6,p,span{
+ color: var(--white);;
+}
+a{
+  text-decoration: none;
+  color:white;
+  
+}
+.top-btn {
+  padding: 0.5rem;
+  height: 2rem;
+  width: 2rem;
+  background-color: var(--darkgrey);
+  border-radius: 50%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  border: 2px solid var(--blue);
+  cursor: pointer;
+  z-index: 1000;
+}
+.grey-container {
+  width: 90%;
+  display: block;
+  background-color: var(--darkgrey);
+  margin: 0.5rem auto;
+  padding: 1rem;
+  border-radius: 0.8rem;
+}
+.div-flex {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 1.5rem;
+}
+
+.select-coin {
+  border-radius: 10rem !important;
+}
+
+
+
+@media only screen and (max-width: 800px) {
+  .top-btn {
+    right: 0.5rem;
+    bottom: 0.5rem;
+  }
+
+  .grey-container {
+    background-color: var(--darkgrey);
+    padding: 0.5rem 0.5rem;
+    border-radius: 0.8rem;
+  }
+
+  .div-flex {
+    gap: 0.5rem;
+    margin: 1rem 1rem;
+    justify-content: space-between;
+  }
+
+  .crypto-heading {
+    display: none;
+  }
+  .select-coin {
+    max-width: 120px !important;
+    font-size: 0.8rem !important;
+    padding: 0rem !important;
+    height: 35px !important;
+  }
 }
