@@ -15,18 +15,18 @@ function WatchListPage() {
   const [coins, setCoins] = useState([]);
 
   useEffect(() => {
-    console.log("watchlist was initialized");
-  }, [watchlist]);
+    const fetchData = async () => {
+      try {
+        const response = await getCoins();
+        const myCoins = response.filter((coin) => watchlist.includes(coin.id));
+        setCoins(myCoins);
+      } catch (error) {
+        console.error("Error fetching coins:", error);
+      }
+    };
 
-  useEffect(() => {
-    getData();
+    fetchData();
   }, [watchlist]);
-
-  const getData = async () => {
-    const response = await getCoins();
-    const myCoins = response.filter((coin) => watchlist.includes(coin.id));
-    setCoins(myCoins);
-  };
 
   return (
     <div>
