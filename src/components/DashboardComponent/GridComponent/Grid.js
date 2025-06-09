@@ -35,7 +35,7 @@ function Grid({ coin, delay }) {
         {/* image */}
         <Link to={`/coin/${coin.id}`}>
         <Tooltip title="Logo">
-          <img src={coin.image} className="coin-logo" />
+          <img src={coin.image} className="coin-logo"  alt={coin.image}/>
           </Tooltip>
         </Link>
 

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useCallback  } from "react";
+// import { useParams } from "react-router-dom";
 
 import Loading from "../components/common/Loading/Loading";
 import Header from "../components/common/Header/Header";
@@ -43,27 +43,25 @@ function ComparePage() {
     labels: [],
     datasets: [{}],
   });
+ const getCoinsData = useCallback(async () => {
+  const response = await getCoins();
+  setAllCoins(response);
 
-  useEffect(() => {
-    getCoinsData();
-  }, []);
+  const data1 = await getCoinData(coin1);
+  const data2 = await getCoinData(coin2);
 
-  const getCoinsData = async () => {
-    const response = await getCoins();
-    setAllCoins(response);
+  if (data1) setCoinDataFunction(setCoinData1, data1);
+  if (data2) setCoinDataFunction(setCoinData2, data2);
 
-    const data1 = await getCoinData(coin1);
-    const data2 = await getCoinData(coin2);
+  await getPrices(coin1, coin2, days, priceType);
+  setLoading(false);
+}, [coin1, coin2, days, priceType]);
 
-    if (data1) {
-      setCoinDataFunction(setCoinData1, data1);
-    }
-    if (data2) {
-      setCoinDataFunction(setCoinData2, data2);
-    }
-    getPrices(coin1, coin2, days, priceType);
-    setLoading(false);
-  };
+useEffect(() => {
+  getCoinsData();
+}, [getCoinsData]);
+
+  
 
   const getPrices = async (coin1, coin2, days, priceType) => {
     const prices1 = await getCoinPrices(coin1, days, priceType);
@@ -102,13 +100,13 @@ function ComparePage() {
         <SelectCoin
           coin={coin1}
           handleChange={(e) => handleCoinChange(e)}
-          allCoins={allCoins.filter((coin) => coin.id != coin2)}
+          allCoins={allCoins.filter((coin) => coin.id !== coin2)}
         />
         <p className="crypto-heading">Crypto 2</p>
         <SelectCoin
           coin={coin2}
           handleChange={(e) => handleCoinChange(e, true)}
-          allCoins={allCoins.filter((coin) => coin.id != coin1)}
+          allCoins={allCoins.filter((coin) => coin.id !== coin1)}
         />
         <SelectDays
           noText={true}

@@ -1,31 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Header from "../components/common/Header/Header";
-import Search from "../components/DashboardComponent/Search/Search";
 import Tabs from "../components/DashboardComponent/Tabs/Tabs";
 import Footer from "../components/common/Footer/Footer";
 import { getCoins } from "../function/getCoins";
-// import TopButton from "../components/common/TopButton/topButton";
 import Button from "../components/common/Button/Button";
 import TopButton from "../components/common/TopButton/TopButton";
 
 function WatchListPage() {
-  const watchlist = localStorage.getItem("watchlist")
-    ? localStorage.getItem("watchlist").split(",")
-    : [];
+  const watchlist = useMemo(() => {
+    const saved = localStorage.getItem("watchlist");
+    return saved ? saved.split(",") : [];
+  }, []);
 
   const [coins, setCoins] = useState([]);
 
   useEffect(() => {
-    console.log("watchlist was changed");
+    console.log("watchlist was initialized");
   }, [watchlist]);
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [watchlist]);
 
   const getData = async () => {
     const response = await getCoins();
-    var myCoins = response.filter((coins) => watchlist.includes(coins.id));
+    const myCoins = response.filter((coin) => watchlist.includes(coin.id));
     setCoins(myCoins);
   };
 

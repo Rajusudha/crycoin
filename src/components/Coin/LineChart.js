@@ -1,6 +1,6 @@
 import React from 'react'
 import { Line } from "react-chartjs-2";
- import { Chart as ChartJS } from "chart.js/auto";
+//  import { Chart as ChartJS } from "chart.js/auto";
 import './linechart.css'
 
 
@@ -26,13 +26,13 @@ function LineChart({ chartData, mutliAxis, priceType }) {
     scales: {
       y: {
         ticks:
-          priceType == "market_caps"
+          priceType === "market_caps"
             ? {
                 callback: function (value) {
                   return "$" + convertNumbers(value);
                 },
               }
-            : priceType == "total_volumes"
+            : priceType === "total_volumes"
             ? {
                 callback: function (value) {
                   return convertNumbers(value);
@@ -50,13 +50,13 @@ function LineChart({ chartData, mutliAxis, priceType }) {
             display: true,
             position: "right",
             ticks:
-              priceType == "market_caps"
+              priceType === "market_caps"
                 ? {
                     callback: function (value) {
                       return "$" + convertNumbers(value);
                     },
                   }
-                : priceType == "total_volumes"
+                : priceType === "total_volumes"
                 ? {
                     callback: function (value) {
                       return convertNumbers(value);

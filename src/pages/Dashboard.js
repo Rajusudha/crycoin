@@ -18,14 +18,12 @@ function Dashboard() {
   const [pageNumber, setPageNumber] = useState(1);
   const [pageCoins, setPageCoins] = useState([]);
 
-  var filteredCoins = data.filter((item) => {
-    if (
-      item.symbol.toLowerCase().includes(search.toLowerCase()) ||
-      item.name.toLowerCase().includes(search.toLowerCase())
-    ) {
-      return item;
-    }
-  });
+  const filteredCoins = data.filter(
+  (item) =>
+    item.symbol.toLowerCase().includes(search.toLowerCase()) ||
+    item.name.toLowerCase().includes(search.toLowerCase())
+);
+
 
   useEffect(() => {
     getData();
@@ -53,7 +51,7 @@ function Dashboard() {
       ) : (
         <>
           <Search search={search} setSearch={setSearch} />
-          {search && filteredCoins.length == 0 ? (
+          {search && filteredCoins.length === 0 ? (
             <div
               style={{
                 display: "flex",

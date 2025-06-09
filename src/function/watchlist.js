@@ -15,7 +15,7 @@ export const addToWatchlist = (id) => {
       )
     ) {
       const previousList = localStorage.getItem("watchlist").split(",");
-      const newList = previousList.filter((item) => item != id);
+      const newList = previousList.filter((item) => item !== id);
       console.log("newlist is>>", newList.toString());
       localStorage.setItem("watchlist", newList.toString());
       window.location.reload();

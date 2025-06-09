@@ -1,34 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import TrendingDownRoundedIcon from "@mui/icons-material/TrendingDownRounded";
 import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
 import "./list.css";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 import { motion } from "framer-motion";
 import Tooltip from "@mui/material/Tooltip";
-import { convertNumbers } from "../../../function/convertNumber";
 import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
 import IconButton from "@mui/material/IconButton";
 import { addToWatchlist, removeFromWatchlist } from "../../../function/watchlist";
 import { Link } from "react-router-dom";
 
 function List({ coin, delay }) {
-// wishlist
   const isWatchlist = localStorage.getItem("watchlist")
     ? localStorage.getItem("watchlist").includes(coin.id)
     : false;
 
-    const [isAdded, setIsAdded] = useState(false);
-    
-    // wishlist end
-    // total volume decrease
-    const [volume, setVolume] = useState("");
+  const [isAdded, setIsAdded] = useState(false);
 
-  useEffect(() => {
-    setVolume(convertNumbers(parseInt(coin.total_volume)));
-  }, []);
-//   end
-
-//   tooltip from when mouse over its show the name
   return (
     <motion.tr
       className="list-row"
@@ -37,20 +25,17 @@ function List({ coin, delay }) {
       transition={{ duration: 0.3, delay: delay }}
     >
 
-{/* image */}
       <Link to={`/coin/${coin.id}`}>
         <td className="td-img">
           <Tooltip title="Logo">
-            <img src={coin.image} className="coin-logo" />
+            <img src={coin.image} className="coin-logo" alt={`${coin.name} logo`} />
           </Tooltip>
         </td>
       </Link>
 
-
-{/* symbole and name */}
       <Link to={`/coin/${coin.id}`}>
         <td className="td-name-flex">
-          <div className="name-flex ">
+          <div className="name-flex">
             <Tooltip title="Symbol">
               <p className="coin-symbol name-text">{coin.symbol}</p>
             </Tooltip>
@@ -61,8 +46,6 @@ function List({ coin, delay }) {
         </td>
       </Link>
 
-
-{/* percentage */}
       <Link to={`/coin/${coin.id}`}>
         <td className="td-chip-flex">
           {coin.price_change_percentage_24h > 0 ? (
@@ -87,7 +70,6 @@ function List({ coin, delay }) {
         </td>
       </Link>
 
-      {/* price */}
       <Link to={`/coin/${coin.id}`}>
         <td>
           <Tooltip title="Price">
@@ -106,8 +88,6 @@ function List({ coin, delay }) {
         </td>
       </Link>
 
-
-      {/* volume and market capital */}
       <Link to={`/coin/${coin.id}`}>
         <td className="td-mkt-cap">
           <Tooltip title="Total Volume">
@@ -124,17 +104,6 @@ function List({ coin, delay }) {
         </td>
       </Link>
 
-
-      {/* <Link to={`/coin/${coin.id}`}>
-        <td className="td-vol-cap">
-          <Tooltip title="Volume">
-            <p>${volume}</p>
-          </Tooltip>
-        </td>
-      </Link> */}
-
-
-      {/* wishlist */}
       <td>
         {isWatchlist || isAdded ? (
           <div
@@ -162,8 +131,6 @@ function List({ coin, delay }) {
           </div>
         )}
       </td>
-
-      {/* wishlist end */}
     </motion.tr>
   );
 }
