@@ -1,70 +1,87 @@
-import React from 'react'
-import { Line } from "react-chartjs-2";
-//  import { Chart as ChartJS } from "chart.js/auto";
-import './linechart.css'
+import React from 'react';
+import { Line } from 'react-chartjs-2';
+import './linechart.css';
+import { convertNumbers } from '../../function/convertNumber';
+
+// ✅ Import and register Chart.js components
+import {
+  Chart as ChartJS,
+  LineElement,
+  PointElement,
+  LineController,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
+ChartJS.register(
+  LineElement,
+  PointElement,
+  LineController,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend
+);
 
 
-// two parameters  optin & data
-
-// import { setChartDataFunction } from "../function/setChartDataFunction";
-
-
-import { convertNumbers } from "../../function/convertNumber";
 
 function LineChart({ chartData, mutliAxis, priceType }) {
   const options = {
     plugins: {
       legend: {
-        display: mutliAxis ? true : false,
+        display: mutliAxis,
       },
     },
     responsive: true,
     interaction: {
-      mode: "index",
+      mode: 'index',
       intersect: false,
     },
     scales: {
       y: {
+        type: 'linear', // ✅ explicitly use registered scale
         ticks:
-          priceType === "market_caps"
+          priceType === 'market_caps'
             ? {
                 callback: function (value) {
-                  return "$" + convertNumbers(value);
+                  return '$' + convertNumbers(value);
                 },
               }
-            : priceType === "total_volumes"
+            : priceType === 'total_volumes'
             ? {
                 callback: function (value) {
                   return convertNumbers(value);
                 },
               }
             : {
-                callback: function (value, index, ticks) {
-                  return "$" + value.toLocaleString();
+                callback: function (value) {
+                  return '$' + value.toLocaleString();
                 },
               },
       },
       y1: mutliAxis
         ? {
-            type: "linear",
+            type: 'linear',
             display: true,
-            position: "right",
+            position: 'right',
             ticks:
-              priceType === "market_caps"
+              priceType === 'market_caps'
                 ? {
                     callback: function (value) {
-                      return "$" + convertNumbers(value);
+                      return '$' + convertNumbers(value);
                     },
                   }
-                : priceType === "total_volumes"
+                : priceType === 'total_volumes'
                 ? {
                     callback: function (value) {
                       return convertNumbers(value);
                     },
                   }
                 : {
-                    callback: function (value, index, ticks) {
-                      return "$" + value.toLocaleString();
+                    callback: function (value) {
+                      return '$' + value.toLocaleString();
                     },
                   },
           }
