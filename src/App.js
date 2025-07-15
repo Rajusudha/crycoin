@@ -7,6 +7,13 @@ import CoinPage from './pages/CoinPage';
 import Compare from './pages/Compare';
 import WatchListPage from './pages/WatchListPage';
 import {createContext} from 'react'
+import SignUp from './SignUp';
+// import SignIn from "./pages/SignIn";
+import LandingPage from "./components/HomePageComponents/LandingPage"
+// import LandingPage from '../components/HomePageComponents/LandingPage'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+
 
 export const themeContext=createContext(null)
 function App() {
@@ -21,8 +28,13 @@ function App() {
           <Route path='/coin/:id' element={[<CoinPage />]}/>
           <Route path='/compare' element={[<Compare />]}/>
           <Route path='/watchList' element={[<WatchListPage/>]}/>
+          <Route path='/signUp' element={[<SignUp/>]}/>
+          <Route path='/landingPage' element={[<LandingPage/>]}/>
         </Routes>
       </Router>
+      <ToastContainer />
+      {/* <SignUp/> */}
+      
      
 
     </div>

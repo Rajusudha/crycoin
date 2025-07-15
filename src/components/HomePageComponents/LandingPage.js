@@ -6,12 +6,16 @@ import './landingpage.css'
 import {motion} from 'framer-motion'   //use framer motion animation to design a content //framer.com/docs/animation
 import Phonecomponent from './PhoneComponent'
 import { RWebShare } from "react-web-share";   //React Webshare share prroject link (install rwebshare npm)
+import Header from '../common/Header/Header'
+import Footer from '../common/Footer/Footer'
 
 
 
 function LandingPage() {
     return (
-        <div className='wrapper'>
+        <>
+        <Header/>
+        <div className='wrapper' >
             <div className='info'>
             {/* animation use motion.div or html tag ,itnitial where to start x-axis or y-axis ,up(-) or down(+) ,
             animate end position where to sit ,transition --duration of animate ,delay */}
@@ -56,6 +60,8 @@ function LandingPage() {
             </div>
           
         </div>
+        <Footer/>
+        </>
       )
 }
 

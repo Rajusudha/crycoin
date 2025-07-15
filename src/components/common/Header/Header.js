@@ -3,9 +3,13 @@ import './header.css'
 import {Link} from 'react-router-dom'
 import Sidebar from '../../common/Header/Sidebar'   //drawer mui component
 import Button from '../../common/Button/Button'
+
 // import { ThemeContext } from '@emotion/react'
 
 import { Switch } from "@mui/material";
+import { auth } from '../../../function/firebase';
+import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 
 function Header() {
@@ -52,6 +56,17 @@ function Header() {
  
 
   // switch end
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      alert('Logout failed: ' + error.message);
+    }
+  };
+
   return (
    
     <div className="navbar">
@@ -84,6 +99,7 @@ function Header() {
         <Link to="/dashboard">
           <Button text="dashboard" />
         </Link>
+        <button className="link" style={{background: 'none', border: 'none', cursor: 'pointer', color: 'var(--grey)', fontWeight: 600, fontSize: '0.8rem'}} onClick={handleLogout}>Logout</button>
        </div>
 
        {/* nav bar end */}
